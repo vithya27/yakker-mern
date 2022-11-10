@@ -4,6 +4,8 @@ import {
   MagnifyingGlassIcon,
   BellAlertIcon,
   EnvelopeIcon,
+  UserIcon,
+  ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import SidebarCard from "./SidebarCard";
 
@@ -19,6 +21,8 @@ const Sidebar = () => {
       <SidebarCard Icon={MagnifyingGlassIcon} title="Explore" />
       <SidebarCard Icon={BellAlertIcon} title="Notifications" />
       <SidebarCard Icon={EnvelopeIcon} title="Messages" />
+      <SidebarCard Icon={UserIcon} title="Profile" />
+      <SidebarCard Icon={ArrowRightOnRectangleIcon} title="Logout" />
     </div>
   );
 };
