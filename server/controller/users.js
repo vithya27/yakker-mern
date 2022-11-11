@@ -1,10 +1,21 @@
 const Users = require("../models/Users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const validator = require("validator");
 const { v4: uuidv4 } = require("uuid");
 
 const createUser = async (req, res) => {
   try {
+    if (!req.body.email || !req.body.password) {
+      throw Error("All fields must be filled");
+    }
+    if (!validator.isEmail(req.body.email)) {
+      throw Error("Email is not valid");
+    }
+    if (!validator.isStrongPassword(req.body.password)) {
+      throw Error("Password is not strong enough.");
+    }
+
     const user = await Users.findOne({ email: req.body.email });
     if (user) {
       return res
@@ -12,18 +23,19 @@ const createUser = async (req, res) => {
         .json({ status: "error", message: "duplicate email" });
     }
 
-    // uses one way encryption technology. RSA encryption. can't get it back again. password goes through bcrypt encryption and becomes hash. can't get back the value.
-    // number shoudl be 20 and above
-    const hash = await bcrypt.hash(req.body.password, 12);
+    // salt is a random string of characters that is added to the users password before the hash.
+    // if 2 ppl use the same password, hackers cannot use password matching because hashes for identical passwords will be different
+    // higher the genSalt number, the longer it will take for person to sign up.
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(req.body.password, salt);
     const createdUser = await Users.create({
       email: req.body.email,
       hash,
     });
     console.log("created user is: ", createdUser);
     res.json({ status: "okay", message: "user created" });
-  } catch (err) {
-    console.log("PUT/users/create", err);
-    res.status(400).json({ status: "error", message: "an error has occurred" });
+  } catch (error) {
+    res.status(400).json({ status: "error", message: error.message });
   }
 };
 
@@ -38,7 +50,7 @@ const loginUser = async (req, res) => {
 
     const result = await bcrypt.compare(req.body.password, user.hash);
     if (!result) {
-      console.log("username or password error");
+      console.log("Username or password error");
       return res.status(401).json({ status: "error", message: "login failed" });
     }
     const payload = {
@@ -63,7 +75,6 @@ const loginUser = async (req, res) => {
 
     res.json(response);
   } catch (err) {
-    console.log("POST/users/login", err);
     res.status(401).json({ status: "error", message: "login failed" });
   }
 };

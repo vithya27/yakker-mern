@@ -1,15 +1,19 @@
-import Sidebar from "./components/Sidebar";
-import Feed from "./components/Feed";
-import Widgets from "./components/Widgets";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginNavBar from "./components/LoginNavBar";
 
 function App() {
   return (
-    <div className="app lg:max-w-6xl mx-auto grid grid-cols-9 max-h-screen overflow-hidden">
-      <Sidebar />
-
-      <Feed />
-
-      <Widgets />
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
