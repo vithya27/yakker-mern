@@ -73,7 +73,7 @@ const loginUser = async (req, res) => {
       refresh,
     };
 
-    res.json(response);
+    res.status(200).json({ payload, response });
   } catch (err) {
     res.status(401).json({ status: "error", message: "login failed" });
   }

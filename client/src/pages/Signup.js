@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import LoginNavBar from "../components/LoginNavBar";
+import { useSignup } from "../hooks/useSignup";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(email, password);
+    await signup(email, password);
   };
   return (
     <>
@@ -51,6 +53,7 @@ const Signup = () => {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="password"
+              autoComplete="on"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               placeholder="Enter your password"
@@ -58,11 +61,12 @@ const Signup = () => {
           </div>
           <div className="flex items-center justify-between">
             <button
+              disabled={isLoading}
               className="bg-yakker hover:bg-white hover:text-yakker text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
             >
               Sign Up
             </button>
+            {error && <div>{error}</div>}
           </div>
         </form>
       </div>
