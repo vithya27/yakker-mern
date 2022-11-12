@@ -14,13 +14,13 @@ const auth = (req, res, next) => {
     } catch (err) {
       return res.status(401).send({
         status: "error",
-        message: "unauthorised",
+        message: "Request is not authorised.",
       });
     }
   } else {
     return res.status(403).send({
       status: "error",
-      message: "missing token",
+      message: "Token is missing.",
     });
   }
 };
