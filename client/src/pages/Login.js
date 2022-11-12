@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import LoginNavBar from "../components/LoginNavBar";
+import { useLogin } from "../hooks/useLogin";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, error, isLoading } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(email, password);
+    await login(email, password);
   };
   return (
     <>
@@ -58,10 +60,22 @@ const Login = () => {
             />
           </div>
           <div className="flex items-center justify-between">
-            <button className="bg-yakker hover:bg-white hover:text-yakker text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <button
+              disabled={isLoading}
+              className="bg-yakker hover:bg-white hover:text-yakker text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
               Login{" "}
             </button>
           </div>
+          {error && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 mt-5 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <strong className="font-bold">{error}</strong>
+              <span className="block sm:inline"> Please try again.</span>
+            </div>
+          )}
         </form>
       </div>
     </>

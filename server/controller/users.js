@@ -46,13 +46,15 @@ const loginUser = async (req, res) => {
     if (!user) {
       return res
         .status(401)
-        .json({ status: "error", message: "not authorised" });
+        .json({ status: "error", message: "This email is not registered" });
     }
 
     const result = await bcrypt.compare(req.body.password, user.hash);
     if (!result) {
       console.log("Username or password error");
-      return res.status(401).json({ status: "error", message: "login failed" });
+      return res
+        .status(401)
+        .json({ status: "error", message: "Login failed." });
     }
     const payload = {
       id: user._id,
