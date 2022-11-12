@@ -66,7 +66,17 @@ const Signup = () => {
             >
               Sign Up
             </button>
-            {error && <div>{error}</div>}
+          </div>
+          <div>
+            {error && (
+              <div
+                class="bg-red-100 border border-red-400 text-red-700 mt-5 px-4 py-3 rounded relative"
+                role="alert"
+              >
+                <strong class="font-bold">{error}</strong>
+                <span class="block sm:inline"> Please try again.</span>
+              </div>
+            )}
           </div>
         </form>
       </div>

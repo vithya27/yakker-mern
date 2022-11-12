@@ -7,10 +7,10 @@ const { v4: uuidv4 } = require("uuid");
 const createUser = async (req, res) => {
   try {
     if (!req.body.email || !req.body.password) {
-      throw Error("All fields must be filled");
+      throw Error("All fields must be filled.");
     }
     if (!validator.isEmail(req.body.email)) {
-      throw Error("Email is not valid");
+      throw Error("Email is not valid.");
     }
     if (!validator.isStrongPassword(req.body.password)) {
       throw Error("Password is not strong enough.");
@@ -18,9 +18,10 @@ const createUser = async (req, res) => {
 
     const user = await Users.findOne({ email: req.body.email });
     if (user) {
-      return res
-        .status(400)
-        .json({ status: "error", message: "duplicate email" });
+      return res.status(400).json({
+        status: "error",
+        message: "An account with this email already exists.",
+      });
     }
 
     // salt is a random string of characters that is added to the users password before the hash.
