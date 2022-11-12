@@ -77,6 +77,15 @@ const Signup = () => {
                 <span class="block sm:inline"> Please try again.</span>
               </div>
             )}
+            {!error && (
+              <div
+                class="p-4 mb-4 mt-5 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+                role="alert"
+              >
+                <span class="font-medium">Congratulations!</span> Your account
+                has been created successfully.
+              </div>
+            )}
           </div>
         </form>
       </div>
