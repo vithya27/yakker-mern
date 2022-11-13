@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { usePost } from "../hooks/usePost";
 
 const YakPost = () => {
   const [input, setInput] = useState("");
   const { user } = useAuthContext();
+  const { post } = usePost();
   console.log(input);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await post(input);
+    setInput("");
+  };
 
   return (
     <div className="flex space-x-2 p-5">
@@ -26,6 +35,7 @@ const YakPost = () => {
             <div className="flex flex-1"></div>
             <button
               disabled={!input}
+              onClick={handleSubmit}
               className="bg-yakker px-5 py-2 font-bold text-white rounded-full w-20 pointer-cursor disabled:opacity-40"
             >
               Yak
