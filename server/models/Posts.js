@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const PostsSchema = new mongoose.Schema(
   {
     content: { type: String },
-    postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    postedBy: { type: Object },
     pinned: Boolean,
   },
   { timestamps: true },

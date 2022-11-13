@@ -9,10 +9,10 @@ const createPosts = async (req, res) => {
 
     const createdPost = await Posts.create({
       content: req.body.content,
-      postedBy: req.body.user.payload.id,
+      postedBy: req.body.user.payload,
     });
 
-    console.log("created user is: ", createdPost);
+    console.log("created post is: ", createdPost);
     res.json({ status: "okay", message: "post created" });
   } catch (error) {
     res.status(400).json({ status: "error", message: error.message });
@@ -20,7 +20,7 @@ const createPosts = async (req, res) => {
 };
 
 const allPosts = async (req, res) => {
-  const posts = await Posts.find();
+  const posts = await Posts.find({ postedBy: req.body.user.payload.id });
   res.json(posts);
 };
 
