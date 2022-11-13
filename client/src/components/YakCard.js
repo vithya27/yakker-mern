@@ -4,6 +4,8 @@ import {
   ArrowPathRoundedSquareIcon,
   HeartIcon,
 } from "@heroicons/react/24/outline";
+import Timeago from "react-timeago";
+
 const YakCard = ({ yak }) => {
   return (
     <>
@@ -18,6 +20,9 @@ const YakCard = ({ yak }) => {
           <div className="flex items-center space-x-1">
             <p className="mr-1 font-bold">
               @{yak.postedBy.email.split("@")[0]}
+            </p>
+            <p className="mr-1 text-sm text-gray-500">
+              <Timeago date={yak.createdAt} />
             </p>
           </div>
         </div>

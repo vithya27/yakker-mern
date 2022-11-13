@@ -22,7 +22,7 @@ const createPosts = async (req, res) => {
 const allPosts = async (req, res) => {
   const posts = await Posts.find({
     "postedBy.id": req.query.user,
-  });
+  }).sort({ createdAt: -1 });
   res.json(posts);
 };
 
