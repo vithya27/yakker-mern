@@ -3,16 +3,16 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { usePost } from "../hooks/usePost";
 
 const YakPost = () => {
-  const [input, setInput] = useState("");
+  const [content, setContent] = useState("");
   const { user } = useAuthContext();
   const { post } = usePost();
-  console.log(input);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await post(input);
-    setInput("");
+    await post(content);
+
+    setContent("");
   };
 
   return (
@@ -27,14 +27,14 @@ const YakPost = () => {
           <input
             className="h-24 w-full text-xl outline-none placeholder:text-xl"
             type="text"
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
+            value={content}
+            onChange={(event) => setContent(event.target.value)}
             placeholder="What's happening?"
           />
           <div className="flex items-center">
             <div className="flex flex-1"></div>
             <button
-              disabled={!input}
+              disabled={!content}
               onClick={handleSubmit}
               className="bg-yakker px-5 py-2 font-bold text-white rounded-full w-20 pointer-cursor disabled:opacity-40"
             >

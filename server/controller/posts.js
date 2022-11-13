@@ -1,7 +1,22 @@
 const Posts = require("../models/Posts");
 
 const createPosts = async (req, res) => {
-  
+  try {
+    if (!req.body.content) {
+      console.log("Content param not sent with request");
+      return res.status(400);
+    }
+
+    const createdPost = await Posts.create({
+      content: req.body.content,
+      postedBy: req.body.user.payload.id,
+    });
+
+    console.log("created user is: ", createdPost);
+    res.json({ status: "okay", message: "post created" });
+  } catch (error) {
+    res.status(400).json({ status: "error", message: error.message });
+  }
 };
 
 const allPosts = async (req, res) => {
