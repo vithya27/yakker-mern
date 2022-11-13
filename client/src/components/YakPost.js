@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const YakPost = () => {
   const [input, setInput] = useState("");
+  const { user } = useAuthContext();
   console.log(input);
+
   return (
     <div className="flex space-x-2 p-5">
       <img
         className="h-14 w-14 rounded-full object-cover mt-4"
-        src="https://i.imgur.com/DpIsMdh.png"
+        src={user.payload.profilePic}
         alt="profile"
       />
       <div className="flex flex-1 items-center pl-2">

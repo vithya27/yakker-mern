@@ -59,6 +59,7 @@ const loginUser = async (req, res) => {
     const payload = {
       id: user._id,
       email: user.email,
+      profilePic: user.profilePic,
     };
 
     const access = jwt.sign(payload, process.env.ACCESS_SECRET, {

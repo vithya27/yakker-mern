@@ -6,6 +6,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { signup, error, isLoading } = useSignup();
+  const [click, setClick] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,6 +14,7 @@ const Signup = () => {
     await signup(email, password);
     setEmail("");
     setPassword("");
+    setClick(true);
   };
   return (
     <>
@@ -79,13 +81,14 @@ const Signup = () => {
                 <span className="block sm:inline"> Please try again.</span>
               </div>
             )}
-            {!error && (
+
+            {click && !error && (
               <div
-                class="p-4 mb-4 mt-5 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+                className="p-4 mb-4 mt-5 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
                 role="alert"
               >
-                <span class="font-medium">Congratulations!</span> Your account
-                has been created successfully.
+                <span className="font-medium">Congratulations!</span> Your
+                account has been created successfully.
               </div>
             )}
           </div>
