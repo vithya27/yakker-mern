@@ -7,7 +7,7 @@ const MyYaks = () => {
   return (
     <div className="col-span-7 lg:col-span-5 border-x">
       <div className="flex items-center justify-between">
-        <h1 className="p-5 pb-0 text-xl font-bold">Home</h1>
+        <h1 className="p-5 pb-0 text-xl font-bold">Profile</h1>
       </div>
       <div>
         <YakPost />
