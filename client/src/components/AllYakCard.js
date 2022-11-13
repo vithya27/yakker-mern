@@ -3,18 +3,10 @@ import {
   ChatBubbleOvalLeftIcon,
   ArrowPathRoundedSquareIcon,
   HeartIcon,
-  TrashIcon,
 } from "@heroicons/react/24/outline";
 import Timeago from "react-timeago";
 
-const YakCard = ({ yak }) => {
-  const handleDelete = async (id) => {
-    console.log(id);
-    const res = await fetch(`http://127.0.0.1:5001/posts/${id}`, {
-      method: "DELETE",
-    });
-  };
-
+const AllYakCard = ({ yak }) => {
   return (
     <>
       <div className="flex flex-col overflow-y-scroll space-x-3 border-y border-gray-100 p-5">
@@ -49,16 +41,10 @@ const YakCard = ({ yak }) => {
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400  hover:text-yakker">
             <HeartIcon className="h-5 w-5" />
           </div>
-          <div className="flex cursor-pointer items-center space-x-3 text-gray-400  hover:text-red-500">
-            <TrashIcon
-              onClick={() => handleDelete(yak._id)}
-              className="h-5 w-5"
-            />
-          </div>
         </div>
       </div>
     </>
   );
 };
 
-export default YakCard;
+export default AllYakCard;

@@ -19,25 +19,31 @@ const createPosts = async (req, res) => {
   }
 };
 
-const allPosts = async (req, res) => {
+const myPosts = async (req, res) => {
   const posts = await Posts.find({
     "postedBy.id": req.query.user,
   }).sort({ createdAt: -1 });
   res.json(posts);
 };
 
+const allPosts = async (req, res) => {
+  const posts = await Posts.find().sort({ createdAt: -1 });
+  res.json(posts);
+};
+
 const deletePost = async (req, res) => {
   try {
-    await Posts.deleteOne({ email: req.body.email });
+    await Posts.findByIdAndDelete(req.params.id);
+
     res.json({ status: "okay", message: "post deleted" });
   } catch (err) {
     console.log("DELETE/ posts/ delete", err);
-    // keep error messages generic. front-end should not know. may be more prone to hacking if they know what the issue is.
     res.status(400).json({ status: "error", message: "an error has occurred" });
   }
 };
 module.exports = {
   createPosts,
+  myPosts,
   allPosts,
   deletePost,
 };

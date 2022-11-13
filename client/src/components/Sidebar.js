@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import SidebarCard from "./SidebarCard";
 import { useLogout } from "../hooks/useLogout";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const { logout } = useLogout();
@@ -22,11 +23,16 @@ const Sidebar = () => {
         src="https://i.imgur.com/DpIsMdh.png"
         alt="logo"
       />
-      <SidebarCard Icon={HomeIcon} title="Home" />
+      <Link to="/">
+        <SidebarCard Icon={HomeIcon} title="Home" />
+      </Link>
+
       <SidebarCard Icon={MagnifyingGlassIcon} title="Explore" />
       <SidebarCard Icon={BellAlertIcon} title="Notifications" />
       <SidebarCard Icon={EnvelopeIcon} title="Messages" />
-      <SidebarCard Icon={UserIcon} title="Profile" />
+      <Link to="/profile">
+        <SidebarCard Icon={UserIcon} title="Profile" />
+      </Link>
       <SidebarCard
         Icon={ArrowRightOnRectangleIcon}
         title="Logout"
