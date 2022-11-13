@@ -20,7 +20,9 @@ const createPosts = async (req, res) => {
 };
 
 const allPosts = async (req, res) => {
-  const posts = await Posts.find({ postedBy: req.body.user.payload.id });
+  const posts = await Posts.find({
+    "postedBy.id": req.query.user,
+  });
   res.json(posts);
 };
 
