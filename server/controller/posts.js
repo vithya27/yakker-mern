@@ -41,6 +41,9 @@ const deletePost = async (req, res) => {
     res.status(400).json({ status: "error", message: "an error has occurred" });
   }
 };
+
+
+
 module.exports = {
   createPosts,
   myPosts,

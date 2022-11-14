@@ -6,7 +6,7 @@ const Profileheader = () => {
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   return (
-    <div className="border-solid border-2 border-slate-200 py-1">
+    <div className="border-y">
       <div className="flex space-x-2 p-5">
         <img
           className="h-14 w-14 rounded-full object-cover mt-4"

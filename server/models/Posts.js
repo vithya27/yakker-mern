@@ -5,7 +5,6 @@ const PostsSchema = new mongoose.Schema(
     content: { type: String },
     postedBy: { type: Object },
     pinned: Boolean,
-    likes: [{ type: Object }],
   },
   { timestamps: true },
   { collection: "posts" }
