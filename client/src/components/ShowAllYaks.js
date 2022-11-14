@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-
-import { useAuthContext } from "../hooks/useAuthContext";
 import AllYakCard from "./AllYakCard";
 
 const ShowAllYaks = () => {
-  const { user } = useAuthContext();
   const [yaks, setYaks] = useState();
 
   const fetchYaks = async () => {

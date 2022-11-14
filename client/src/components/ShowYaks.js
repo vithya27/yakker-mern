@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-
-import { useAuthContext } from "../hooks/useAuthContext";
 import YakCard from "./YakCard";
 
 const ShowYaks = () => {
-  const { user } = useAuthContext();
+  const user = JSON.parse(localStorage.getItem("user"));
   const [yaks, setYaks] = useState();
 
   const fetchYaks = async () => {

@@ -4,7 +4,7 @@ import { usePost } from "../hooks/usePost";
 
 const YakPost = () => {
   const [content, setContent] = useState("");
-  const { user } = useAuthContext();
+  const user = JSON.parse(localStorage.getItem("user"));
   const { post } = usePost();
 
   const handleSubmit = async (e) => {
