@@ -16,8 +16,8 @@ const ShowYaks = () => {
   useEffect(() => {
     setTimeout(() => {
       fetchYaks();
-    }, 5000);
-  }, [yaks]);
+    }, 10000);
+  }, []);
 
   return (
     <div className="h-screen overflow-y-scroll">

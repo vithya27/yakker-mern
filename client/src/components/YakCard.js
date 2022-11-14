@@ -15,13 +15,6 @@ const YakCard = ({ yak }) => {
     });
   };
 
-  const handleLike = async (id) => {
-    if (id === undefined) {
-      return;
-    }
-    
-  };
-
   return (
     <>
       <div className="flex flex-col overflow-y-scroll space-x-3 border-y border-gray-100 p-5">
@@ -54,10 +47,7 @@ const YakCard = ({ yak }) => {
             <ArrowPathRoundedSquareIcon className="h-5 w-5" />
           </div>
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400  hover:text-yakker">
-            <HeartIcon
-              onClick={() => handleLike(yak._id)}
-              className="h-5 w-5"
-            />
+            <HeartIcon className="h-5 w-5" />
           </div>
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400  hover:text-red-500">
             <TrashIcon

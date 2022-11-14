@@ -4,11 +4,13 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { user } = useAuthContext();
   return (
     <div>
+      <Toaster />
       <BrowserRouter>
         <Routes>
           <Route
@@ -23,10 +25,7 @@ function App() {
             path="/signup"
             element={!user ? <Signup /> : <Navigate to="/" />}
           />
-          <Route
-            path="/profile"
-            element={!user ? <Login /> : <Navigate to="/profile" />}
-          />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </div>

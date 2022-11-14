@@ -9,7 +9,6 @@ export const usePost = () => {
   const post = async (content) => {
     setIsLoading(true);
     setError(null);
-    console.log(JSON.stringify({ content, user }));
 
     const response = await fetch("http://127.0.0.1:5001/posts/create", {
       method: "PUT",

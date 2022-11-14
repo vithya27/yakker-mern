@@ -1,21 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AllYakCard from "./AllYakCard";
 
-const ShowAllYaks = () => {
-  const [yaks, setYaks] = useState();
-
-  const fetchYaks = async () => {
-    const res = await fetch(`http://127.0.0.1:5001/posts/allposts`);
-    const json = await res.json();
-    setYaks(json);
-  };
-
-  useEffect(() => {
-    setTimeout(() => {
-      fetchYaks();
-    }, 5000);
-  }, [yaks]);
-
+const ShowAllYaks = ({ yaks }) => {
   return (
     <div className="h-screen overflow-y-scroll">
       {yaks && yaks.map((yak) => <AllYakCard key={yak.id} yak={yak} />)}

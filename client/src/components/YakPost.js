@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useAuthContext } from "../hooks/useAuthContext";
 import { usePost } from "../hooks/usePost";
+import { toast } from "react-hot-toast";
 
 const YakPost = () => {
   const [content, setContent] = useState("");
@@ -9,8 +9,9 @@ const YakPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const refreshToast = toast.loading("New Yak coming up");
     await post(content);
+    toast.success("Yak Posted", { id: refreshToast });
 
     setContent("");
   };
