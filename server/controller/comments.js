@@ -1,4 +1,6 @@
 const Comments = require("../models/Comments");
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 
 const createComment = async (req, res) => {
   try {
@@ -21,9 +23,25 @@ const createComment = async (req, res) => {
 };
 
 const getComments = async (req, res) => {
-  const comments = await Comments.find({
-    postId: req.params.id,
-  }).sort({ createdAt: -1 });
+  const comments = await Comments.aggregate([
+    { $match: { postId: ObjectId(`${req.params.id}`) } },
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    {
+      $lookup: {
+        from: "posts",
+        localField: "postId",
+        foreignField: "_id",
+        as: "post",
+      },
+    },
+  ]).sort({ createdAt: -1 });
   res.json(comments);
 };
 

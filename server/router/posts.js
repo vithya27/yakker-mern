@@ -13,7 +13,7 @@ router.put("/create", createPosts);
 
 router.get("/allposts", protect, allPosts);
 
-router.get("/posts", protect, myPosts);
+router.get("/:id", protect, myPosts);
 
 router.delete("/:id", protect, deletePost);
 

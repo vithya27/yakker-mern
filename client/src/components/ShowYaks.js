@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from "react";
 import YakCard from "./YakCard";
 
-const ShowYaks = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const ShowYaks = ({ profile }) => {
   const [yaks, setYaks] = useState();
-
-  const fetchYaks = async () => {
-    const res = await fetch(
-      `http://127.0.0.1:5001/posts/posts?user=${user.payload.id}`
-    );
-    const json = await res.json();
-    setYaks(json);
-  };
+  const token = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    setTimeout(() => {
-      fetchYaks();
-    }, 10000);
-  }, []);
+    fetch(`http://127.0.0.1:5001/posts/${profile._id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token.response.access}`,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setYaks(data);
+      });
+  }, [profile]);
 
   return (
     <div className="h-screen overflow-y-scroll">
-      {yaks && yaks.map((yak) => <YakCard key={yak.id} yak={yak} />)}
+      {yaks &&
+        yaks.map((yak) => <YakCard key={yak.id} yak={yak} profile={profile} />)}
     </div>
   );
 };

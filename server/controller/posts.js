@@ -1,4 +1,6 @@
 const Posts = require("../models/Posts");
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 
 const createPosts = async (req, res) => {
   try {
@@ -20,9 +22,17 @@ const createPosts = async (req, res) => {
 };
 
 const myPosts = async (req, res) => {
-  const posts = await Posts.find({
-    userId: req.user.id,
-  }).sort({ createdAt: -1 });
+  const posts = await Posts.aggregate([
+    { $match: { userId: ObjectId(`${req.params.id}`) } },
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+  ]).sort({ createdAt: -1 });
   res.json(posts);
 };
 
@@ -44,9 +54,13 @@ const allPosts = async (req, res) => {
 
 const deletePost = async (req, res) => {
   try {
-    if (req.user.role === "admin" || req.user.id === req.body.id) {
+    console.log(1);
+    console.log(req.user);
+    if (req.user.role === "admin" || req.user.email === req.body.email) {
       await Posts.findByIdAndDelete(req.params.id);
+
       res.json({ status: "okay", message: "post deleted" });
+      console.log(2);
     }
   } catch (err) {
     console.log("DELETE/ posts/ delete", err);
