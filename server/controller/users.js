@@ -67,6 +67,8 @@ const loginUser = async (req, res) => {
     }
     const payload = {
       id: user._id,
+      username: user.username,
+      profilePic: user.profilePic,
       role: user.role,
     };
 

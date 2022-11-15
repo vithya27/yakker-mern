@@ -20,7 +20,7 @@ const Sidebar = () => {
     <div className="col-span-2 flex flex-col items-center px-4 md:items-start">
       <img
         className="m-4 h-10 w-10"
-        src="https://i.imgur.com/DpIsMdh.png"
+        src="https://i.imgur.com/l2jU7WX.png"
         alt="logo"
       />
       <Link to="/">

@@ -27,7 +27,18 @@ const myPosts = async (req, res) => {
 };
 
 const allPosts = async (req, res) => {
-  const posts = await Posts.find().sort({ createdAt: -1 });
+  // const posts = await Posts.find().sort({ createdAt: -1 });
+  const posts = await Posts.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+  ]).sort({ createdAt: -1 });
+
   res.json(posts);
 };
 

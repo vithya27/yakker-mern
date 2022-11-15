@@ -17,7 +17,7 @@ const Profileheader = () => {
 
       <div>
         <p className="ml-5 font-bold">
-          @{currentUser.payload.email.split("@")[0]}
+          @{currentUser.payload.username}
         </p>
       </div>
       <div>

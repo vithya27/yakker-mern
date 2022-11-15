@@ -18,7 +18,7 @@ const Login = () => {
       <div className="flex flex-col items-center justify-center w-full">
         <img
           className="h-20 w-20 rounded-full object-cover mt-8 mb-4"
-          src="https://i.imgur.com/DpIsMdh.png"
+          src="https://i.imgur.com/l2jU7WX.png"
           alt=""
         />
         <form

@@ -24,7 +24,7 @@ const Signup = () => {
       <div className="flex flex-col items-center justify-center w-full">
         <img
           className="h-20 w-20 rounded-full object-cover mt-8 mb-4"
-          src="https://i.imgur.com/DpIsMdh.png"
+          src="https://i.imgur.com/l2jU7WX.png"
           alt=""
         />
         <form
@@ -43,7 +43,7 @@ const Signup = () => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="email"
+              type="username"
               onChange={(e) => setUsername(e.target.value)}
               value={username}
               placeholder="Enter your e-mail"
