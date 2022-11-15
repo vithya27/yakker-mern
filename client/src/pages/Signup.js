@@ -5,15 +5,17 @@ import { useSignup } from "../hooks/useSignup";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const { signup, error, isLoading } = useSignup();
   const [click, setClick] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await signup(email, password);
+    await signup(email, password, username);
     setEmail("");
     setPassword("");
+    setUsername("");
     setClick(true);
   };
   return (
@@ -32,6 +34,21 @@ const Signup = () => {
           <h3 className="mb-4 text-3xl font-bold tracking-tight leading-none text-yakker md:text-4xl lg:text-5xl">
             Sign Up
           </h3>
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="username"
+            >
+              Username:{" "}
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="email"
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+              placeholder="Enter your e-mail"
+            />
+          </div>
           <div className="mb-6">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"

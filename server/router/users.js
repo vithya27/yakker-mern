@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
+const { protect } = require("../middleware/authMiddleware");
 
 const {
   createUser,
   loginUser,
-  refreshUser,
+
   allUsers,
   findUser,
   deleteUser,
@@ -15,12 +15,10 @@ router.put("/create", createUser);
 
 router.post("/login", loginUser);
 
-router.post("/refresh", refreshUser);
+router.get("/users", protect, allUsers);
 
-router.get("/users", auth, allUsers);
+router.get("/finduser", protect, findUser);
 
-router.post("/users", auth, findUser);
-
-router.delete("/users", auth, deleteUser);
+router.delete("/delete", protect, deleteUser);
 
 module.exports = router;

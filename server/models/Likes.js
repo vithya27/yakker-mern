@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 
-const CommentsSchema = new mongoose.Schema(
+const LikesSchema = new mongoose.Schema(
   {
-    content: { type: String },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -14,10 +13,9 @@ const CommentsSchema = new mongoose.Schema(
       ref: "Posts",
     },
   },
-  { timestamps: true },
-  { collection: "comments" }
+  { collection: "likes" }
 );
 
-const Comments = mongoose.model("Comments", CommentsSchema);
+const Likes = mongoose.model("Likes", LikesSchema);
 
-module.exports = Comments;
+module.exports = Likes;
