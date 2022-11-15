@@ -5,6 +5,7 @@ import ShowAllYaks from "./ShowAllYaks";
 
 const Feed = () => {
   const [yaks, setYaks] = useState(null);
+  const [input, setInput] = useState(null);
   const token = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const Feed = () => {
       .then((data) => {
         setYaks(data);
       });
-  }, []);
+  }, [input]);
 
   console.log(yaks);
 
@@ -28,7 +29,10 @@ const Feed = () => {
     window.location.reload();
   };
 
-  const handleSubmit = () => {};
+  const onPost = (post) => {
+    let newPost = { post };
+    setInput(newPost);
+  };
 
   return (
     <div className="col-span-7 lg:col-span-5 border-x">
@@ -41,7 +45,7 @@ const Feed = () => {
       </div>
 
       <div>
-        <YakPost handleSubmit={handleSubmit} />
+        <YakPost onPost={onPost} />
       </div>
       <div>{yaks && <ShowAllYaks yaks={yaks} />}</div>
     </div>

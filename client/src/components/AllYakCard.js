@@ -13,12 +13,12 @@ const AllYakCard = ({ yak }) => {
         <div className="flex space-x-3">
           <img
             className="h-10 w-10 rounded-full object-cover"
-            src={yak.user.profilePic}
+            src={yak.user[0].profilePic}
             alt="profile"
           />
 
           <div className="flex items-center space-x-1">
-            <p className="mr-1 font-bold">@{yak.user}</p>
+            <p className="mr-1 font-bold">@{yak.user[0].username}</p>
             <p className="mr-1 text-sm text-gray-500">
               <Timeago date={yak.createdAt} />
             </p>

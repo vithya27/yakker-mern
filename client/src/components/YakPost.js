@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { usePost } from "../hooks/usePost";
 import { toast } from "react-hot-toast";
 
-const YakPost = () => {
+const YakPost = (props) => {
   const [content, setContent] = useState("");
   const user = JSON.parse(localStorage.getItem("user"));
   const { post } = usePost();
@@ -11,6 +11,7 @@ const YakPost = () => {
     e.preventDefault();
     const refreshToast = toast.loading("New Yak coming up");
     await post(content);
+    props.onPost(content);
     toast.success("Yak Posted", { id: refreshToast });
 
     setContent("");
