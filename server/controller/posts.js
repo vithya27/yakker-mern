@@ -35,8 +35,8 @@ const deletePost = async (req, res) => {
   try {
     if (req.user.role === "admin" || req.user.id === req.body.id) {
       await Posts.findByIdAndDelete(req.params.id);
+      res.json({ status: "okay", message: "post deleted" });
     }
-    res.json({ status: "okay", message: "post deleted" });
   } catch (err) {
     console.log("DELETE/ posts/ delete", err);
     res.status(400).json({ status: "error", message: "an error has occurred" });

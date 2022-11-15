@@ -9,8 +9,8 @@ const createComment = async (req, res) => {
 
     const createdComment = await Comments.create({
       content: req.body.content,
-      postedBy: req.body.postedBy,
-      yakPostID: req.body.postid,
+      userId: req.user.id,
+      postId: req.body.postid,
     });
 
     console.log("created comment is: ", createdComment);
@@ -22,14 +22,16 @@ const createComment = async (req, res) => {
 
 const getComments = async (req, res) => {
   const comments = await Comments.find({
-    yakPostID: req.params.id,
+    postId: req.params.id,
   }).sort({ createdAt: -1 });
   res.json(comments);
 };
 
 const deleteComment = async (req, res) => {
   try {
-    await Comments.findByIdAndDelete(req.params.id);
+    if (req.user.role === "admin" || req.user.id === req.body.id) {
+      await Comments.findByIdAndDelete(req.params.id);
+    }
     res.json({ status: "okay", message: "comment deleted" });
   } catch (err) {
     console.log("DELETE/ comments/ delete", err);
