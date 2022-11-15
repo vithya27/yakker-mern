@@ -21,7 +21,7 @@ const createPosts = async (req, res) => {
 
 const myPosts = async (req, res) => {
   const posts = await Posts.find({
-    "postedBy.id": req.query.user,
+    userId: req.user.id,
   }).sort({ createdAt: -1 });
   res.json(posts);
 };
