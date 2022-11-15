@@ -9,7 +9,7 @@ const createPosts = async (req, res) => {
 
     const createdPost = await Posts.create({
       content: req.body.content,
-      postedBy: req.body.user.payload,
+      userId: req.body.userid,
     });
 
     console.log("created post is: ", createdPost);
@@ -33,8 +33,9 @@ const allPosts = async (req, res) => {
 
 const deletePost = async (req, res) => {
   try {
-    await Posts.findByIdAndDelete(req.params.id);
-
+    if (req.user.role === "admin" || req.user.id === req.body.id) {
+      await Posts.findByIdAndDelete(req.params.id);
+    }
     res.json({ status: "okay", message: "post deleted" });
   } catch (err) {
     console.log("DELETE/ posts/ delete", err);
