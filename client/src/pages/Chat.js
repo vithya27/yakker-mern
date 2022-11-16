@@ -1,14 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Sidebar from "../components/Sidebar";
 import Conversation from "../components/Conversation";
 import ChatBox from "../components/ChatBox";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { io } from "socket.io-client";
 
 const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const { user } = useAuthContext();
   const token = JSON.parse(localStorage.getItem("user"));
+  const socket = useRef();
+
+  useEffect(() => {
+    socket.current = io("http://localhost:8800");
+    socket.current.emit("new-user-add", user.payload.id);
+    socket.current.on("get-users", (users) => {
+      setOnlineUsers(users);
+    });
+  }, [user]);
+
+  console.log(onlineUsers);
 
   const getMessages = async () => {
     const res = await fetch(`http://127.0.0.1:5001/chats/${user.payload.id}`, {

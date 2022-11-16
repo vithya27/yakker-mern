@@ -49,6 +49,33 @@ const ChatBox = ({ chat, currentUserId }) => {
   const handleChange = (newMessage) => {
     setNewMessage(newMessage);
   };
+
+  const handleSend = async (e) => {
+    e.preventDefault();
+    const message = {
+      senderId: currentUserId,
+      text: newMessage,
+      chatId: chat._id,
+    };
+    try {
+      const { data } = await fetch(`http://127.0.0.1:5001/messages`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token.response.access}`,
+        },
+        body: JSON.stringify(message),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setMessages([...messages, data]);
+          setNewMessage("");
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className="">
@@ -72,26 +99,32 @@ const ChatBox = ({ chat, currentUserId }) => {
               </div>
               <div></div>
               {messages.map((message) => (
-                <>
+                <div className="flex flex-col">
                   <div
                     className={
-                      message.senderId === currentUserId
-                        ? "self-end flex flex-col ml-5 mt-5 bg-teal-600 text-white w-fit p-5 rounded-lg"
-                        : "flex flex-col bg-lime-100 gap-4 rounded-lg p-4 h-auto overflow-scroll"
+                      message.senderId !== currentUserId
+                        ? "flex flex-col ml-5 mt-5 bg-teal-600 text-white w-fit p-5 rounded-lg"
+                        : "flex flex-col ml-5 mt-5 mr-5 bg-lime-100 rounded-lg p-5 w-fit self-end"
                     }
                   >
                     <span>{message.text}</span>
-                    <span className="text-xs text-gray-200">
+                    <span
+                      className={
+                        message.senderId !== currentUserId
+                          ? "text-xs text-gray-300 self-end"
+                          : "text-xs text-gray-800 self-end"
+                      }
+                    >
                       <Timeago date={message.createdAt} />
                     </span>
                   </div>
-                </>
+                </div>
               ))}
             </div>
             <div className="bg-white flex justify-between h-12 items-center gap-4 p-3 rounded-lg self-end">
               <InputEmoji value={newMessage} onChange={handleChange} />
               <div>
-                <button>Send</button>
+                <button onClick={handleSend}>Send</button>
               </div>
             </div>
           </>
