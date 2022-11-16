@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Conversation = ({ chat, currentUserId }) => {
+const Conversation = ({ chat, currentUserId, online }) => {
   const [userData, setUserData] = useState(null);
   const token = JSON.parse(localStorage.getItem("user"));
 
@@ -29,7 +29,9 @@ const Conversation = ({ chat, currentUserId }) => {
             <img className="h-10 w-10" src={userData?.profilePic} alt="" />
             <div className="flex flex-col text-base font-bold">
               <span>{userData?.username}</span>
-              <span className="text-sm text-gray-500 font-light">Online</span>
+              <span className="text-sm text-gray-500 font-light">
+                {online && online ? "Online" : "Offline"}
+              </span>
             </div>
           </div>
         </div>

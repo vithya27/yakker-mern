@@ -59,6 +59,12 @@ const Chat = () => {
     getMessages();
   }, []);
 
+  const checkOnlineStatus = (chat) => {
+    const chatMember = chat.members.find((member) => member !== user._id);
+    const online = onlineUsers.find((user) => user.userId === chatMember);
+    return online ? true : false;
+  };
+
   return (
     <>
       <div className="app bg-gray-100 lg:max-w-6xl mx-auto grid grid-cols-9 max-h-screen overflow-y-scroll border-x">
@@ -70,7 +76,11 @@ const Chat = () => {
             <div className="flex flex-col gap-4 text-lg font-normal">
               {chats.map((chat) => (
                 <div onClick={() => setCurrentChat(chat)}>
-                  <Conversation chat={chat} currentUserId={user.payload.id} />
+                  <Conversation
+                    chat={chat}
+                    currentUserId={user.payload.id}
+                    online={checkOnlineStatus(chat)}
+                  />
                 </div>
               ))}
             </div>
