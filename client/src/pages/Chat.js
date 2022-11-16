@@ -48,7 +48,7 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="flex flex-col bg-white rounded gap-4 mt-16 ml-5 w-96">
+        <div className="flex flex-col bg-white rounded gap-4 mt-16 ml-5 mb-5 w-96 h-screen overflow-y-scroll">
           <ChatBox chat={currentChat} currentUserId={user.payload.id} />
         </div>
       </div>
