@@ -8,6 +8,7 @@ const users = require("./router/users");
 const posts = require("./router/posts");
 const comments = require("./router/comments");
 const chats = require("./router/chats");
+const messages = require("./router/messages");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/users", users);
 app.use("/posts", posts);
 app.use("/comments", comments);
 app.use("/chats", chats);
+app.use("/messages", messages);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT);
