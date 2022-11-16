@@ -65,7 +65,7 @@ const Chat = () => {
         <Sidebar />
 
         <div className="col-span-2 ">
-          <div className="flex flex-col gap-4 rounded-lg h-auto text-2xl font-bold min-h-screen bg-gray-100 overflow-y-scroll border-x">
+          <div className="flex flex-col gap-4 rounded-lg text-2xl font-bold bg-gray-100 border-x">
             <h2 className="mt-5 ml-5">Messages</h2>
             <div className="flex flex-col gap-4 text-lg font-normal">
               {chats.map((chat) => (

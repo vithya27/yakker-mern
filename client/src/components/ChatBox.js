@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Timeago from "react-timeago";
 import InputEmoji from "react-input-emoji";
 
@@ -7,6 +7,7 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const token = JSON.parse(localStorage.getItem("user"));
+  const scroll = useRef();
 
   useEffect(() => {
     if (receiveMessage !== null && receiveMessage.chatId === chat._id) {
@@ -84,6 +85,13 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
     const receiverId = chat.members.find((id) => id !== currentUserId);
     setSendMessage({ ...message, receiverId });
   };
+
+  // scroll to most recent message
+
+  useEffect(() => {
+    scroll.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <>
       <div className="">
@@ -109,6 +117,7 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
               {messages.map((message) => (
                 <div className="flex flex-col">
                   <div
+                    ref={scroll}
                     className={
                       message.senderId !== currentUserId
                         ? "flex flex-col ml-5 mt-5 bg-teal-600 text-white w-fit p-5 rounded-lg"
