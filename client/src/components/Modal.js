@@ -1,55 +1,67 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 
-const Modal = () => {
-  const [showModal, setShowModal] = useState(false);
+const Modal = ({ visible, onClose, yakId }) => {
+  const [newComment, setNewComment] = useState("");
+  const token = JSON.parse(localStorage.getItem("user"));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    fetch(`http://127.0.0.1:5001/comments/create`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.response.access}`,
+      },
+      body: JSON.stringify({ content: newComment, postid: yakId }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
+    onClose();
+    toast.success("Comment posted", { duration: 2000 });
+
+    setNewComment("");
+  };
+
+  const handleOnClose = (e) => {
+    if (e.target.id === "container") onClose();
+  };
+
+  if (!visible) return null;
   return (
-    <>
-      {showModal ? (
-        <>
-          <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
-                  <h3 className="text-3xl font=semibold">Comment</h3>
-                  <button
-                    className="bg-transparent border-0 text-black float-right"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <span className="text-black opacity-7 h-6 w-6 text-xl block bg-gray-400 py-0 rounded-full">
-                      x
-                    </span>
-                  </button>
-                </div>
-                <div className="relative p-6 flex-auto">
-                  <form className="bg-gray-200 shadow-md rounded px-8 pt-6 pb-8 w-full">
-                    <label className="block text-black text-sm font-bold mb-1">
-                      First Name
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-1 text-black" />
-                  </form>
-                </div>
-                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                  <button
-                    className="text-red-800 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Close
-                  </button>
-                  <button
-                    className="text-white bg-yakker active:bg-yakker font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      ) : null}
-    </>
+    <div
+      id="container"
+      onClick={handleOnClose}
+      className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center"
+    >
+      <div className="bg-white p-5 rounded w-72">
+        <h1 className="font-semibold text-center text-xl text-gray-700">
+          Comment
+        </h1>
+        <p className="text-center text-gray-500 mb-5">Remember to be nice!</p>
+        <div className="flex flex-col">
+          <input
+            type="text"
+            value={newComment}
+            onChange={(event) => setNewComment(event.target.value)}
+            className="border border-gray-700 p-2 rounded mb-5 text-gray-700"
+            placeholder="Type your comment here"
+          />
+        </div>
+        <div className="text-center">
+          <button
+            onClick={handleSubmit}
+            className="px-5 py-2 bg-yakker text-white rounded"
+          >
+            Comment
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

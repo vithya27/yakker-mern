@@ -5,6 +5,7 @@ import {
   HeartIcon,
 } from "@heroicons/react/24/outline";
 import Timeago from "react-timeago";
+import Modal from "./Modal";
 
 const AllYakCard = ({ yak }) => {
   const [comments, setComments] = useState([]);
@@ -23,13 +24,19 @@ const AllYakCard = ({ yak }) => {
       .then((data) => {
         setComments(data);
       });
-    console.log(yak._id, comments);
   };
+
+  const [showMyModal, setShowMyModal] = useState(false);
+  const handleOnClose = () => {
+    setShowMyModal(false);
+  };
+
+  const [yakId, setYakId] = useState("");
 
   useEffect(() => {
     refreshComments();
-    console.log(comments);
-  }, []);
+  }, [yak, showMyModal]);
+
   return (
     <>
       <div className="flex flex-col overflow-y-scroll space-x-3 border-y border-gray-100 p-5">
@@ -53,7 +60,18 @@ const AllYakCard = ({ yak }) => {
 
         <div className="mt-5 flex justify-between">
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400 hover:text-yakker">
-            <ChatBubbleOvalLeftIcon className="h-5 w-5" />
+            <ChatBubbleOvalLeftIcon
+              onClick={() => {
+                setShowMyModal(true);
+                setYakId(yak._id);
+              }}
+              className="h-5 w-5"
+            />
+            <Modal
+              visible={showMyModal}
+              onClose={handleOnClose}
+              yakId={yakId}
+            />
             <p>{comments.length}</p>
           </div>
 
