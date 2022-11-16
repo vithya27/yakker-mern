@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
+import Chat from "./pages/Chat";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { Toaster } from "react-hot-toast";
@@ -36,6 +37,10 @@ function App() {
               <Navigate to="/" />
             )
           }
+        />
+        <Route
+          path="/messages"
+          element={user ? <Chat /> : <Navigate to="/login" />}
         />
       </Routes>
     </div>

@@ -32,7 +32,9 @@ const Sidebar = () => {
 
       <SidebarCard Icon={MagnifyingGlassIcon} title="Explore" />
       <SidebarCard Icon={BellAlertIcon} title="Notifications" />
-      <SidebarCard Icon={EnvelopeIcon} title="Messages" />
+      <Link to="/messages">
+        <SidebarCard Icon={EnvelopeIcon} title="Messages" />
+      </Link>
 
       {user && user.payload.role === "admin" ? (
         <Link to="/admin">
