@@ -1,11 +1,12 @@
-import { ChartBarSquareIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Conversation from "../components/Conversation";
+import ChatBox from "../components/ChatBox";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const Chat = () => {
   const [chats, setChats] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null);
   const { user } = useAuthContext();
   const token = JSON.parse(localStorage.getItem("user"));
 
@@ -23,6 +24,7 @@ const Chat = () => {
         setChats(data);
       });
   };
+  console.log(chats);
 
   useEffect(() => {
     getMessages();
@@ -30,23 +32,25 @@ const Chat = () => {
 
   return (
     <>
-      <div className="app lg:max-w-6xl mx-auto grid grid-cols-9 max-h-screen overflow-hidden border-x">
+      <div className="app bg-gray-100 lg:max-w-6xl mx-auto grid grid-cols-9 max-h-screen overflow-hidden border-x">
         <Sidebar />
 
-        <div className="col-span-2 mt-20 border-x border-y rounded">
-          <div className="flex flex-col gap-4 rounded-lg p-4 h-auto text-2xl font-bold min-h-screen bg-white">
-            <h2>Messages</h2>
+        <div className="col-span-2 ">
+          <div className="flex flex-col gap-4 rounded-lg h-auto text-2xl font-bold min-h-screen bg-gray-100 overflow-y-scroll border-x">
+            <h2 className="mt-5 ml-5">Messages</h2>
             <div className="flex flex-col gap-4 text-lg font-normal">
-              {chats.map((chat) => {
-                <div>
-                  <Conversation chat={chat} currentUser={user.payload.id} />
-                </div>;
-              })}
+              {chats.map((chat) => (
+                <div onClick={() => setCurrentChat(chat)}>
+                  <Conversation chat={chat} currentUserId={user.payload.id} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 mt-20 ml-5">Right Side</div>
+        <div className="flex flex-col bg-white rounded gap-4 mt-16 ml-5 w-96">
+          <ChatBox chat={currentChat} currentUserId={user.payload.id} />
+        </div>
       </div>
     </>
   );

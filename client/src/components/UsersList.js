@@ -36,7 +36,7 @@ const UsersList = () => {
         <h1 className="p-5 pb-0 text-xl font-bold">Admin Access Only</h1>
       </div>
 
-      <div className="mt-5 h-96 overflow-y-scroll">
+      <div className="mt-5 max-h-screen overflow-y-scroll">
         {users &&
           users.map((user) => (
             <UsersCard key={user._id} user={user} onDelete={onDelete} />

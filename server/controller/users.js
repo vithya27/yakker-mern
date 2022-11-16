@@ -112,6 +112,22 @@ const findUser = async (req, res) => {
   }
 };
 
+const findUserbyId = async (req, res) => {
+  try {
+    const user = await Users.findById(req.params.id);
+    if (!user) {
+      console.log("user not found");
+      return res
+        .status(400)
+        .json({ status: "error", message: "user not found" });
+    }
+    res.json(user);
+  } catch (err) {
+    console.log("POST/users/user", err);
+    res.status(400).json({ status: "error", message: "an error has occurred" });
+  }
+};
+
 const deleteUser = async (req, res) => {
   try {
     if (req.user.role === "admin") await Users.findByIdAndDelete(req.params.id);
@@ -127,5 +143,6 @@ module.exports = {
   loginUser,
   allUsers,
   findUser,
+  findUserbyId,
   deleteUser,
 };
