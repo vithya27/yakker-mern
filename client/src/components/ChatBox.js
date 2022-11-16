@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react";
 import Timeago from "react-timeago";
 import InputEmoji from "react-input-emoji";
 
-const ChatBox = ({ chat, currentUserId }) => {
+const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const token = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    if (receiveMessage !== null && receiveMessage.chatId === chat._id) {
+      setMessages([...messages, receiveMessage]);
+    }
+  }, [receiveMessage]);
 
   useEffect(() => {
     const userId = chat?.members?.find((id) => id !== currentUserId);
@@ -73,6 +79,10 @@ const ChatBox = ({ chat, currentUserId }) => {
         setMessages([...messages, data]);
         setNewMessage("");
       });
+
+    // send message to socket server
+    const receiverId = chat.members.find((id) => id !== currentUserId);
+    setSendMessage({ ...message, receiverId });
   };
   return (
     <>

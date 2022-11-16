@@ -9,6 +9,8 @@ const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const [sendMessage, setSendMessage] = useState(null);
+  const [receiveMessage, setReceiveMessage] = useState(null);
   const { user } = useAuthContext();
   const token = JSON.parse(localStorage.getItem("user"));
   const socket = useRef();
@@ -20,6 +22,20 @@ const Chat = () => {
       setOnlineUsers(users);
     });
   }, [user]);
+
+  // sending message to socket server
+  useEffect(() => {
+    if (sendMessage !== null) {
+      socket.current.emit("send-message", sendMessage);
+    }
+  }, [sendMessage]);
+
+  // receive message from socket server
+  useEffect(() => {
+    socket.current.on("receive-message", (data) => {
+      setReceiveMessage(data);
+    });
+  }, []);
 
   console.log(onlineUsers);
 
@@ -45,7 +61,7 @@ const Chat = () => {
 
   return (
     <>
-      <div className="app bg-gray-100 lg:max-w-6xl mx-auto grid grid-cols-9 max-h-screen overflow-hidden border-x">
+      <div className="app bg-gray-100 lg:max-w-6xl mx-auto grid grid-cols-9 max-h-screen overflow-y-scroll border-x">
         <Sidebar />
 
         <div className="col-span-2 ">
@@ -62,7 +78,12 @@ const Chat = () => {
         </div>
 
         <div className="flex flex-col bg-white rounded gap-4 mt-16 ml-5 mb-5 w-96 h-screen overflow-y-scroll">
-          <ChatBox chat={currentChat} currentUserId={user.payload.id} />
+          <ChatBox
+            chat={currentChat}
+            currentUserId={user.payload.id}
+            setSendMessage={setSendMessage}
+            receiveMessage={receiveMessage}
+          />
         </div>
       </div>
     </>
