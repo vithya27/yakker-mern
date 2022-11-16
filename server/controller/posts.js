@@ -54,14 +54,10 @@ const allPosts = async (req, res) => {
 
 const deletePost = async (req, res) => {
   try {
-    console.log(1);
-    console.log(req.user.email);
-    console.log(req.body.email);
     if (req.user.role === "admin" || req.user.email === req.body.email) {
       await Posts.findByIdAndDelete(req.params.id);
 
       res.json({ status: "okay", message: "post deleted" });
-      console.log(2);
     }
   } catch (err) {
     console.log("DELETE/ posts/ delete", err);

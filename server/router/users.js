@@ -19,6 +19,6 @@ router.get("/users", protect, allUsers);
 
 router.get("/finduser", protect, findUser);
 
-router.delete("/delete", protect, deleteUser);
+router.delete("/delete/:id", protect, deleteUser);
 
 module.exports = router;

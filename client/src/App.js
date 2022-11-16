@@ -2,6 +2,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+import Admin from "./pages/Admin";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { Toaster } from "react-hot-toast";
@@ -25,6 +26,16 @@ function App() {
         <Route
           path="/profile"
           element={user ? <Profile /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/admin"
+          element={
+            user && user.payload.role === "admin" ? (
+              <Admin />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
         />
       </Routes>
     </div>

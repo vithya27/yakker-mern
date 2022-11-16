@@ -6,12 +6,15 @@ import {
   EnvelopeIcon,
   UserIcon,
   ArrowRightOnRectangleIcon,
+  NoSymbolIcon,
 } from "@heroicons/react/24/outline";
 import SidebarCard from "./SidebarCard";
 import { useLogout } from "../hooks/useLogout";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Sidebar = () => {
+  const { user } = useAuthContext();
   const { logout } = useLogout();
   const handleLogout = () => {
     logout();
@@ -30,9 +33,17 @@ const Sidebar = () => {
       <SidebarCard Icon={MagnifyingGlassIcon} title="Explore" />
       <SidebarCard Icon={BellAlertIcon} title="Notifications" />
       <SidebarCard Icon={EnvelopeIcon} title="Messages" />
-      <Link to="/profile">
-        <SidebarCard Icon={UserIcon} title="Profile" />
-      </Link>
+
+      {user && user.payload.role === "admin" ? (
+        <Link to="/admin">
+          <SidebarCard Icon={NoSymbolIcon} title="Admin" />
+        </Link>
+      ) : (
+        <Link to="/profile">
+          <SidebarCard Icon={UserIcon} title="Profile" />
+        </Link>
+      )}
+
       <SidebarCard
         Icon={ArrowRightOnRectangleIcon}
         title="Logout"

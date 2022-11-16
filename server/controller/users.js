@@ -92,8 +92,6 @@ const allUsers = async (req, res) => {
 
   if (req.user.role === "admin") {
     users = await Users.find();
-  } else {
-    users = await Users.findOne({ email: req.user.email });
   }
   res.json(users);
 };
@@ -116,7 +114,7 @@ const findUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    await Users.deleteOne({ email: req.body.email });
+    if (req.user.role === "admin") await Users.findByIdAndDelete(req.params.id);
     res.json({ status: "okay", message: "user deleted" });
   } catch (err) {
     console.log("DELETE/ users/ delete", err);
