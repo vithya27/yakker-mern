@@ -55,7 +55,8 @@ const allPosts = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     console.log(1);
-    console.log(req.user);
+    console.log(req.user.email);
+    console.log(req.body.email);
     if (req.user.role === "admin" || req.user.email === req.body.email) {
       await Posts.findByIdAndDelete(req.params.id);
 

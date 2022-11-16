@@ -6,25 +6,29 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import Timeago from "react-timeago";
+import { toast } from "react-hot-toast";
 
-const YakCard = ({ yak, profile }) => {
+const YakCard = ({ yak, profile, onDelete }) => {
   const token = JSON.parse(localStorage.getItem("user"));
+  const email = profile.email;
+  console.log(JSON.stringify({ email }));
 
   const handleDelete = async (postid) => {
-    console.log(JSON.stringify({ email: profile.email }));
-    await fetch(`http://127.0.0.1:5001/posts/${postid}`, {
+    fetch(`http://127.0.0.1:5001/posts/${postid}`, {
       method: "DELETE",
       headers: {
-        Authorization: "Bearer " + token.response.access,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.response.access}`,
       },
-      body: JSON.stringify({ email: profile.email }),
+      body: JSON.stringify({ email }),
     })
-      .then((response) => console.log(response.status))
-      .catch((error) => console.error(error));
-  };
-
-  const handleLike = async (id) => {
-    console.log(id);
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        onDelete(data);
+      });
+    toast.error("Yak Deleted", { duration: 2000 });
   };
 
   return (
@@ -57,10 +61,7 @@ const YakCard = ({ yak, profile }) => {
             <ArrowPathRoundedSquareIcon className="h-5 w-5" />
           </div>
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400  hover:text-yakker">
-            <HeartIcon
-              className="h-5 w-5"
-              onClick={() => handleLike(yak._id)}
-            />
+            <HeartIcon className="h-5 w-5" />
           </div>
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400  hover:text-red-500">
             <TrashIcon

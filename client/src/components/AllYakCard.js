@@ -56,6 +56,7 @@ const AllYakCard = ({ yak }) => {
             <ChatBubbleOvalLeftIcon className="h-5 w-5" />
             <p>{comments.length}</p>
           </div>
+
           <div className="flex cursor-pointer items-center space-x-3 text-gray-400  hover:text-yakker">
             <ArrowPathRoundedSquareIcon className="h-5 w-5" />
           </div>

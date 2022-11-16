@@ -4,6 +4,7 @@ import YakCard from "./YakCard";
 const ShowYaks = ({ profile }) => {
   const [yaks, setYaks] = useState();
   const token = JSON.parse(localStorage.getItem("user"));
+  const [deleteYak, setDeleteYak] = useState(null);
 
   useEffect(() => {
     fetch(`http://127.0.0.1:5001/posts/${profile._id}`, {
@@ -18,12 +19,25 @@ const ShowYaks = ({ profile }) => {
       .then((data) => {
         setYaks(data);
       });
-  }, [profile]);
+  }, [profile, deleteYak]);
+
+  const onDelete = (post) => {
+    let newPost = { post };
+    setDeleteYak(newPost);
+  };
+  console.log(deleteYak);
 
   return (
     <div className="h-screen overflow-y-scroll">
       {yaks &&
-        yaks.map((yak) => <YakCard key={yak.id} yak={yak} profile={profile} />)}
+        yaks.map((yak) => (
+          <YakCard
+            key={yak.id}
+            yak={yak}
+            profile={profile}
+            onDelete={onDelete}
+          />
+        ))}
     </div>
   );
 };
