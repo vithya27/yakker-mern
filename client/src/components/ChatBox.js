@@ -22,7 +22,6 @@ const ChatBox = ({ chat, currentUserId }) => {
         })
         .then((data) => {
           setUserData(data);
-          console.log(data);
         });
     if (chat !== null) getUserData();
   }, [chat, currentUserId]);
@@ -42,7 +41,6 @@ const ChatBox = ({ chat, currentUserId }) => {
           setMessages(data);
         });
     };
-    console.log(messages);
     if (chat !== null) fetchMessages();
   }, [chat]);
 
@@ -57,24 +55,24 @@ const ChatBox = ({ chat, currentUserId }) => {
       text: newMessage,
       chatId: chat._id,
     };
-    try {
-      const { data } = await fetch(`http://127.0.0.1:5001/messages`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token.response.access}`,
-        },
-        body: JSON.stringify(message),
+    console.log(JSON.stringify(message));
+
+    const res = await fetch(`http://127.0.0.1:5001/messages/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.response.access}`,
+      },
+      body: JSON.stringify(message),
+    })
+      .then((res) => {
+        return res.json();
       })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          setMessages([...messages, data]);
-          setNewMessage("");
-        });
-    } catch (error) {
-      console.log(error);
-    }
+      .then((data) => {
+        console.log(data);
+        setMessages([...messages, data]);
+        setNewMessage("");
+      });
   };
   return (
     <>
