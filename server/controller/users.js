@@ -138,6 +138,15 @@ const deleteUser = async (req, res) => {
     res.status(400).json({ status: "error", message: "an error has occurred" });
   }
 };
+
+const updateUser = async (req, res) => {
+  const response = await Users.updateOne(
+    { userId: req.body.userId },
+    { profilePic: req.body.profilePic }
+  );
+  console.log(response);
+  res.json({ status: "ok", message: "updated" });
+};
 module.exports = {
   createUser,
   loginUser,
@@ -145,4 +154,5 @@ module.exports = {
   findUser,
   findUserbyId,
   deleteUser,
+  updateUser,
 };

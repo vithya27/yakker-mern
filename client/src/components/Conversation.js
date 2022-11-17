@@ -28,8 +28,10 @@ const Conversation = ({ chat, currentUserId, online }) => {
           <div className="flex flex-row justify-around items-center">
             <img className="h-10 w-10" src={userData?.profilePic} alt="" />
             <div className="flex flex-col text-base font-bold">
-              <span>{userData?.username}</span>
-              <span className="text-sm text-gray-500 font-light">
+              <span className="text-sm font-semibold">
+                {userData?.username}
+              </span>
+              <span className="text-xs text-gray-500 font-light">
                 {online && online ? "Online" : "Offline"}
               </span>
             </div>

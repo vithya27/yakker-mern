@@ -6,12 +6,17 @@ const Profileheader = ({ profile }) => {
   console.log(profile);
   return (
     <div className="border-y">
-      <div className="flex space-x-2 p-5">
-        <img
-          className="h-14 w-14 rounded-full object-cover mt-4"
-          src={profile.profilePic}
-          alt="profile"
-        />
+      <div>
+        <div className="flex space-x-2 p-5">
+          <img
+            className="h-20 w-20 rounded-full object-cover mt-4"
+            src={profile.profilePic}
+            alt="profile"
+          />
+        </div>
+        <button className="bg-slate-100 ml-5 px-2 py-2 mr-5 mb-2 font-light text-sm text-black rounded w-20 pointer-cursor disabled:opacity-40">
+          Update Picture
+        </button>
       </div>
 
       <div>

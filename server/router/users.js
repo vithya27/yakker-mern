@@ -9,6 +9,7 @@ const {
   findUser,
   findUserbyId,
   deleteUser,
+  updateUser,
 } = require("../controller/users");
 
 router.put("/create", createUser);
@@ -22,5 +23,7 @@ router.get("/finduser", protect, findUser);
 router.get("/finduserbyid/:id", protect, findUserbyId);
 
 router.delete("/delete/:id", protect, deleteUser);
+
+router.patch("/update", protect, updateUser);
 
 module.exports = router;
