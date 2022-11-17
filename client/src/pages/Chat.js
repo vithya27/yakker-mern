@@ -67,7 +67,7 @@ const Chat = () => {
 
   return (
     <>
-      <div className="app bg-gray-100 lg:max-w-6xl mx-auto grid grid-cols-9 max-h-screen overflow-y-scroll border-x">
+      <div className="app bg-gray-100 lg:max-w-6xl mx-auto grid grid-cols-9 h-screen overflow-y-scroll border-x">
         <Sidebar />
 
         <div className="col-span-2 ">
@@ -87,7 +87,7 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="flex flex-col bg-white rounded gap-4 mt-16 ml-5 mb-5 w-96 h-screen overflow-y-scroll">
+        <div className="flex flex-col bg-white rounded gap-4 mt-16 ml-5 mb-5 w-96 h-96 overflow-y-scroll">
           <ChatBox
             chat={currentChat}
             currentUserId={user.payload.id}

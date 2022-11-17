@@ -94,11 +94,11 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
 
   return (
     <>
-      <div className="">
+      <div className="h-96">
         {chat ? (
           <>
             <div className="mt-2">
-              <div className="flex flex-col">
+              <div className="flex flex-col h-56">
                 <div>
                   <div className="flex flex-row ml-2 items-center">
                     <img
