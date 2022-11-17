@@ -70,7 +70,7 @@ const Chat = () => {
       <div className="app bg-gray-100 lg:max-w-6xl mx-auto grid grid-cols-9 h-screen overflow-y-scroll border-x">
         <Sidebar />
 
-        <div className="col-span-2 ">
+        <div className="col-span-3">
           <div className="flex flex-col gap-4 rounded-lg text-2xl font-bold bg-gray-100 border-x">
             <h2 className="mt-5 ml-5">Messages</h2>
             <div className="flex flex-col gap-4 text-lg font-normal">

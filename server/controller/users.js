@@ -140,9 +140,12 @@ const deleteUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const response = await Users.updateOne(
-    { userId: req.body.userId },
-    { profilePic: req.body.profilePic }
+  const response = await Users.findByIdAndUpdate(
+    req.params.id,
+    {
+      profilePic: req.body.profilePic,
+    },
+    { new: true }
   );
   console.log(response);
   res.json({ status: "ok", message: "updated" });

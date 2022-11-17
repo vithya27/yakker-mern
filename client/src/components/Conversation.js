@@ -25,15 +25,16 @@ const Conversation = ({ chat, currentUserId, online }) => {
     <>
       <div className="bg-white p-2 ml-5 mr-5 rounded hover:bg-lime-100">
         <div>
-          <div className="flex flex-row justify-around items-center">
+          <div className="flex flex-row items-center">
             <img className="h-10 w-10" src={userData?.profilePic} alt="" />
-            <div className="flex flex-col text-base font-bold">
+            <div className="flex flex-col ml-5 text-base font-bold">
               <span className="text-sm font-semibold">
                 {userData?.username}
               </span>
-              <span className="text-xs text-gray-500 font-light">
-                {online && online ? "Online" : "Offline"}
-              </span>
+              {/* to be added at a later stage*/}
+              {/* <span className="text-xs text-gray-500 font-light">
+                {online ? "Online" : "Offline"}
+              </span> */}
             </div>
           </div>
         </div>

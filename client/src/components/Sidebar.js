@@ -20,7 +20,7 @@ const Sidebar = () => {
     logout();
   };
   return (
-    <div className="col-span-2 flex flex-col items-center px-4 md:items-start bg-white">
+    <div className="col-span-2 xs:col-span-1 flex flex-col items-center px-4 md:items-start bg-white">
       <img
         className="m-4 h-10 w-10"
         src="https://i.imgur.com/l2jU7WX.png"

@@ -24,6 +24,6 @@ router.get("/finduserbyid/:id", protect, findUserbyId);
 
 router.delete("/delete/:id", protect, deleteUser);
 
-router.patch("/update", protect, updateUser);
+router.patch("/update/:id", protect, updateUser);
 
 module.exports = router;

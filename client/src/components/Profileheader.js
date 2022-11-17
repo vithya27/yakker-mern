@@ -1,9 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Timeago from "react-timeago";
+import axios from "axios";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 
 const Profileheader = ({ profile }) => {
-  console.log(profile);
+  const token = JSON.parse(localStorage.getItem("user"));
+  const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState(null);
+
+  const uploadImage = () => {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "yakker");
+
+    axios
+      .post("https://api.cloudinary.com/v1_1/dfwv9hdnq/image/upload", formData)
+      .then((response) => {
+        setImageUrl(response.data.url);
+      });
+    console.log(imageUrl);
+
+    if (imageUrl !== null) {
+      fetch(`http://127.0.0.1:5001/users/update/${token.payload.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token.response.access}`,
+        },
+        body: JSON.stringify({ profilePic: imageUrl }),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+        });
+
+      const newData = JSON.stringify({
+        payload: {
+          id: token.payload.id,
+          profilePic: imageUrl !== null ? imageUrl : token.payload.profilePic,
+          role: token.payload.role,
+          username: token.payload.username,
+        },
+        response: { access: token.response.access },
+      });
+
+      console.log(newData);
+
+      localStorage.setItem("user", newData);
+
+      window.location.reload();
+    }
+  };
+
   return (
     <div className="border-y">
       <div>
@@ -14,9 +64,24 @@ const Profileheader = ({ profile }) => {
             alt="profile"
           />
         </div>
-        <button className="bg-slate-100 ml-5 px-2 py-2 mr-5 mb-2 font-light text-sm text-black rounded w-20 pointer-cursor disabled:opacity-40">
-          Update Picture
-        </button>
+
+        <div className="ml-5 flex flex-row">
+          <p className="font-light">Change your profile picture: </p>
+          <input
+            className=" block w-72 ml-2 text-sm text-gray-500 file:mr-4 file:py-1 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-yakker file:text-white hover:file:bg-white hover:file:text-yakker"
+            id="file_input"
+            type="file"
+            onChange={(e) => {
+              setImage(e.target.files[0]);
+            }}
+          />
+          <button
+            className="block h-7 bg-yakker text-sm text-white hover:bg-white hover:text-yakker rounded px-4 py-1"
+            onClick={uploadImage}
+          >
+            Upload
+          </button>
+        </div>
       </div>
 
       <div>
