@@ -69,16 +69,9 @@ npm start
 
 ![ReactJS App Hierarchy](github-readme-images/app-hierarchy.jpg)
 
-## Screenshots of App
+## App Demo
+https://user-images.githubusercontent.com/108888457/202707444-9a008b47-1145-4b7d-9fde-d6ef08757cd0.mp4
 
-Signup Page:
-![Signup](github-readme-images/User-stories.png)
-
-Login Page:
-
-Home Page:
-
-Mobile-responsive design:
 
 ## Back-end API endpoints
 
