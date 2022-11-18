@@ -10,7 +10,7 @@ Yakker is a social media web application which facilitates interactions between 
 4. [Technologies Used](#technologies-used)
 5. [Libraries Used](#libraries-used)
 6. [Installation Instructions](#installation-instructions)
-7. [Application Structure](#application-structure)
+7. [ReactJS Application Hierarchy](#reactjs-application-hierarchy)
 8. [Back-end API Endpoints](#backend-api)
 9. [Next Steps](#next-steps)
 
@@ -22,7 +22,7 @@ Yakker is a social media web application which facilitates interactions between 
 
 ## Technologies Used
 
-- React
+- ReactJS
 - Tailwind CSS
 - MongoDB
 - Express
@@ -30,20 +30,35 @@ Yakker is a social media web application which facilitates interactions between 
 - Socket.io
 - BCrypt
 - JSONWebToken
+- Cloudinary
 
 ## Libraries Used
 
 - react-hot-toast
 - react-timeago
 - react-twitter-embed
-- Cloudinary
 - react-input-emoji
 
 ## Installation Instructions
 
 For client:
 
-## Application Structure
+> npm install
+> npm start
+
+For server:
+
+> npm install
+> npm run dev
+
+For socket:
+
+> npm install
+> npm start
+
+## ReactJS Application Hierarchy
+
+![ReactJS App Hierarchy](github-readme-images/app-hierarchy.jpg)
 
 ## Back-end API endpoints
 
