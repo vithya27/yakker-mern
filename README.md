@@ -16,19 +16,32 @@ Yakker is a social media web application which facilitates interactions between 
 
 ## Description
 
-
 ## User Stories
 
 ## Wireframes
 
 ## Technologies Used
+
 - React
 - Tailwind CSS
-- 
+- MongoDB
+- Express
+- Node
+- Socket.io
+- BCrypt
+- JSONWebToken
 
 ## Libraries Used
 
+- react-hot-toast
+- react-timeago
+- react-twitter-embed
+- Cloudinary
+- react-input-emoji
+
 ## Installation Instructions
+
+For client:
 
 ## Application Structure
 
