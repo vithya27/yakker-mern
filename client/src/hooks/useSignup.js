@@ -7,7 +7,6 @@ export const useSignup = () => {
   const signup = async (email, password, username) => {
     setIsLoading(true);
     setError(null);
-    console.log(JSON.stringify({ email, password, username }));
 
     const response = await fetch("http://127.0.0.1:5001/users/create", {
       method: "PUT",
@@ -15,12 +14,10 @@ export const useSignup = () => {
       body: JSON.stringify({ email, password, username }),
     });
     const json = await response.json();
-    console.log(json);
 
     if (!response.ok) {
       setIsLoading(false);
       setError(json.message);
-      console.log(error);
     }
     if (response.ok) {
       setIsLoading(false);

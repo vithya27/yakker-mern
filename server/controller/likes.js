@@ -6,8 +6,6 @@ const createLikes = async (req, res) => {
       userId: req.user.id,
       postId: req.body.postid,
     });
-
-    console.log("Like is created");
     res.json({ status: "okay", message: "like created" });
   } catch (error) {
     res.status(400).json({ status: "error", message: error.message });

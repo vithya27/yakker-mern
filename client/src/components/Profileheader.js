@@ -18,7 +18,6 @@ const Profileheader = ({ profile }) => {
       .then((response) => {
         setImageUrl(response.data.url);
       });
-    console.log(imageUrl);
 
     if (imageUrl !== null) {
       fetch(`http://127.0.0.1:5001/users/update/${token.payload.id}`, {
@@ -45,8 +44,6 @@ const Profileheader = ({ profile }) => {
         },
         response: { access: token.response.access },
       });
-
-      console.log(newData);
 
       localStorage.setItem("user", newData);
 

@@ -11,7 +11,6 @@ export const usePost = () => {
     setError(null);
 
     const userid = user.payload.id;
-    console.log(userid);
 
     const response = await fetch("http://127.0.0.1:5001/posts/create", {
       method: "PUT",
@@ -19,12 +18,10 @@ export const usePost = () => {
       body: JSON.stringify({ content, userid }),
     });
     const json = await response.json();
-    console.log(json);
 
     if (!response.ok) {
       setIsLoading(false);
       setError(json.message);
-      console.log(error);
     }
     if (response.ok) {
       setIsLoading(false);

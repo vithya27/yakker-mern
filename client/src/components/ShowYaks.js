@@ -25,7 +25,6 @@ const ShowYaks = ({ profile }) => {
     let newPost = { post };
     setDeleteYak(newPost);
   };
-  console.log(deleteYak);
 
   return (
     <div className="h-screen overflow-y-scroll">

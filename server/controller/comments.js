@@ -5,7 +5,6 @@ const ObjectId = mongoose.Types.ObjectId;
 const createComment = async (req, res) => {
   try {
     if (!req.body.content) {
-      console.log("Content param not sent with request");
       return res.status(400);
     }
 
@@ -15,7 +14,6 @@ const createComment = async (req, res) => {
       postId: req.body.postid,
     });
 
-    console.log("created comment is: ", createdComment);
     res.json({ status: "okay", message: "comment created" });
   } catch (error) {
     res.status(400).json({ status: "error", message: error.message });
@@ -52,7 +50,6 @@ const deleteComment = async (req, res) => {
     }
     res.json({ status: "okay", message: "comment deleted" });
   } catch (err) {
-    console.log("DELETE/ comments/ delete", err);
     res.status(400).json({ status: "error", message: "an error has occurred" });
   }
 };

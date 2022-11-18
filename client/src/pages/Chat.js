@@ -37,8 +37,6 @@ const Chat = () => {
     });
   }, []);
 
-  console.log(onlineUsers);
-
   const getMessages = async () => {
     const res = await fetch(`http://127.0.0.1:5001/chats/${user.payload.id}`, {
       method: "GET",
@@ -53,7 +51,6 @@ const Chat = () => {
         setChats(data);
       });
   };
-  console.log(chats);
 
   useEffect(() => {
     getMessages();

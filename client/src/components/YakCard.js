@@ -11,7 +11,6 @@ import { toast } from "react-hot-toast";
 const YakCard = ({ yak, profile, onDelete }) => {
   const token = JSON.parse(localStorage.getItem("user"));
   const email = profile.email;
-  console.log(JSON.stringify({ email }));
 
   const handleDelete = async (postid) => {
     fetch(`http://127.0.0.1:5001/posts/${postid}`, {

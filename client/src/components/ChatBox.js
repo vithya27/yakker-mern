@@ -62,7 +62,6 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
       text: newMessage,
       chatId: chat._id,
     };
-    console.log(JSON.stringify(message));
 
     const res = await fetch(`http://127.0.0.1:5001/messages/`, {
       method: "POST",
@@ -76,7 +75,6 @@ const ChatBox = ({ chat, currentUserId, setSendMessage, receiveMessage }) => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setMessages([...messages, data]);
         setNewMessage("");
       });

@@ -23,8 +23,6 @@ const Feed = () => {
       });
   }, [input]);
 
-  console.log(yaks);
-
   const handleRefresh = async () => {
     window.location.reload();
   };

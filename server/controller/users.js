@@ -42,7 +42,6 @@ const createUser = async (req, res) => {
       username: req.body.username,
       hash,
     });
-    console.log("created user is: ", createdUser);
     res.json({ status: "okay", message: "user created" });
   } catch (error) {
     res.status(400).json({ status: "error", message: error.message });
@@ -60,7 +59,6 @@ const loginUser = async (req, res) => {
 
     const result = await bcrypt.compare(req.body.password, user.hash);
     if (!result) {
-      console.log("Username or password error");
       return res
         .status(401)
         .json({ status: "error", message: "Login failed." });
@@ -100,14 +98,12 @@ const findUser = async (req, res) => {
   try {
     const user = await Users.findById(req.user.id);
     if (!user) {
-      console.log("user not found");
       return res
         .status(400)
         .json({ status: "error", message: "user not found" });
     }
     res.json(user);
   } catch (err) {
-    console.log("POST/users/user", err);
     res.status(400).json({ status: "error", message: "an error has occurred" });
   }
 };
@@ -116,14 +112,12 @@ const findUserbyId = async (req, res) => {
   try {
     const user = await Users.findById(req.params.id);
     if (!user) {
-      console.log("user not found");
       return res
         .status(400)
         .json({ status: "error", message: "user not found" });
     }
     res.json(user);
   } catch (err) {
-    console.log("POST/users/user", err);
     res.status(400).json({ status: "error", message: "an error has occurred" });
   }
 };
@@ -133,8 +127,6 @@ const deleteUser = async (req, res) => {
     if (req.user.role === "admin") await Users.findByIdAndDelete(req.params.id);
     res.json({ status: "okay", message: "user deleted" });
   } catch (err) {
-    console.log("DELETE/ users/ delete", err);
-    // keep error messages generic. front-end should not know. may be more prone to hacking if they know what the issue is.
     res.status(400).json({ status: "error", message: "an error has occurred" });
   }
 };
@@ -147,7 +139,6 @@ const updateUser = async (req, res) => {
     },
     { new: true }
   );
-  console.log(response);
   res.json({ status: "ok", message: "updated" });
 };
 module.exports = {
