@@ -2,23 +2,26 @@
 
 Yakker is a social media web application which facilitates interactions between users, inspired by Twitter.
 
+The platform was created for the purpose of allowing users to see updates about each other and to interact privately with one another in real-time. 
+
 ## Table of Contents
 
-1. [Description](#description)
-2. [User Stories](#user-stories)
-3. [Wireframes](#wireframes)
-4. [Technologies Used](#technologies-used)
-5. [Libraries Used](#libraries-used)
-6. [Installation Instructions](#installation-instructions)
-7. [ReactJS Application Hierarchy](#reactjs-application-hierarchy)
-8. [Back-end API Endpoints](#backend-api)
-9. [Next Steps](#next-steps)
-
-## Description
+1. [User Stories](#user-stories)
+2. [Wireframes](#wireframes)
+3. [Technologies Used](#technologies-used)
+4. [Libraries Used](#libraries-used)
+5. [Installation Instructions](#installation-instructions)
+6. [ReactJS Application Hierarchy](#reactjs-application-hierarchy)
+7. [Back-end API Endpoints](#backend-api)
+8. [Next Steps](#next-steps)
 
 ## User Stories
 
+![User Stories](github-readme-images/User-stories.png)
+
 ## Wireframes
+
+![Wireframe](github-readme-images/Wireframe.jpg)
 
 ## Technologies Used
 
@@ -41,26 +44,75 @@ Yakker is a social media web application which facilitates interactions between 
 
 ## Installation Instructions
 
-For client:
+For client folder:
 
-> npm install
-> npm start
+```
+npm install
+npm start
+```
 
-For server:
+For server folder:
 
-> npm install
-> npm run dev
+```
+npm install
+npm run dev
+```
 
-For socket:
+For socket folder:
 
-> npm install
-> npm start
+```
+npm install
+npm start
+```
 
 ## ReactJS Application Hierarchy
 
 ![ReactJS App Hierarchy](github-readme-images/app-hierarchy.jpg)
 
+## Screenshots of App
+
+Signup Page:
+![Signup](github-readme-images/User-stories.png)
+
+Login Page:
+
+Home Page:
+
+Mobile-responsive design:
+
 ## Back-end API endpoints
+
+- Users
+
+  1. Create new user account
+  2. User login
+  3. Update user's profile picture
+  4. Find all users
+  5. Find a user by Id
+  6. Delete a user (admin-only endpoint implemented in front end)
+
+- Posts
+
+  1. Create posts
+  2. Find all posts
+  3. Find user's posts
+  4. Delete posts (not implemented in front end yet)
+
+- Comments
+
+  1. Create comment
+  2. Find comments
+  3. Delete comments (not implemented in front end yet)
+
+- Chats
+
+  1. Create chat
+  2. Find user chat
+  3. Find chat
+
+- Messages
+  1. Add messages
+  2. Get messages
 
 ## Next Steps
 
@@ -70,4 +122,12 @@ For socket:
 
 - Implement the ability to comment on a comment
 
+- Implement content moderation by admin
+
 ## Credits
+
+- <a href="https://www.flaticon.com/free-icons/yak" title="yak icons">Yak icons created by Freepik - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/account" title="account icons">Account icons created by srip - Flaticon</a>
+- The Net Ninja on Youtube
+- ZAINKEEPSCODE on Youtube
+- Pedrotech on Youtube
