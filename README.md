@@ -1,6 +1,6 @@
 # Yakker
 
-Yakker is a social media web application which facilitates interactions between users, inspired by Twitter.
+Yakker is a social media web application which facilitates interactions between users. It is inspired by Twitter.
 
 The platform was created for the purpose of allowing users to see updates about each other and to interact privately with one another in real-time. 
 
