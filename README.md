@@ -1,20 +1,38 @@
 # Yakker
 
-Inspired by Twitter
+Yakker is a social media web application which facilitates interactions between users, inspired by Twitter.
 
 ## Table of Contents
 
-## Focus
+1. [Description](#description)
+2. [User Stories](#user-stories)
+3. [Wireframes](#wireframes)
+4. [Technologies Used](#technologies-used)
+5. [Libraries Used](#libraries-used)
+6. [Installation Instructions](#installation-instructions)
+7. [Application Structure](#application-structure)
+8. [Back-end API Endpoints](#backend-api)
+9. [Next Steps](#next-steps)
 
-## General Approach
+## Description
 
-## Technologies used
 
-## Libraries used
-
-## Installation instructions
+## User Stories
 
 ## Wireframes
+
+## Technologies Used
+- React
+- Tailwind CSS
+- 
+
+## Libraries Used
+
+## Installation Instructions
+
+## Application Structure
+
+## Back-end API endpoints
 
 ## Next Steps
 
