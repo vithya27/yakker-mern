@@ -2,20 +2,26 @@
 
 Inspired by Twitter
 
-# Table of Contents
+## Table of Contents
 
-# General Approach
+## Focus
 
-# User Stories
+## General Approach
 
-# Technologies used
+## Technologies used
 
-# Libraries used
+## Libraries used
 
-# Installation instructions
+## Installation instructions
 
-# Wireframes
+## Wireframes
 
-# Next Steps
+## Next Steps
 
-# Credits
+- Implement the ability to follow and unfollow other users
+
+- Implement the like and re-yak function
+
+- Implement the ability to comment on a comment
+
+## Credits
